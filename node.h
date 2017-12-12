@@ -1,33 +1,31 @@
 
+#ifndef SDC_NODE_H
+#define SDC_NODE_H
+
 #include <queue>
 #include "packet.h"
 
 namespace sdc {
-  public class node {
-    public:
-      const int node_id;
-      const int node_count; 
-      const int[] flow_counts;
-      const std::queue<packet>[] local_queues;
-      
+  class node {
+  private:
+    // Node identifier
+    int m_node_id;
+    int m_node_count; 
+    // Local queues
+    std::queue<packet>* m_local_queues;
+  public:
+    // Constructors and destructor
+    node(int node_id, int node_count);
+    node();
+    ~node();
+    
+    // Getters
+    int node_id();
 
-      node(int node_id, int node_count) {
-        this->node_id = node_id;
-        this->node_count = node_count;
-        flow_counts = new int[node_count];
-        local_queues = new std::queue<packet>[node_count];
-        //for (int i = 0; i < node_count; i++) {
-        //
-        //}
-      }
-      
-      ~node() {
-        delete flow_counts;
-        delete local_queues;
-      }
-      
-      void enter_packet(sdc::packet pkt) {
-        
-      }
-  }
+    // Packet processing
+    void accept_packet(sdc::packet pkt);
+    void transmit_next_packet();
+  };
 }
+
+#endif

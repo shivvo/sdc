@@ -1,7 +1,8 @@
-
 #include "simulator.h"
 
 namespace sdc {
+
+  // Constructors/destructor
 
   simulator::simulator(int node_count) {
     m_node_count = node_count;
@@ -9,7 +10,7 @@ namespace sdc {
     for (int i = 0; i < m_node_count; i++) {
       m_nodes[i] = new sdc::node(i, m_node_count);
     }
-    m_network_fabric = new sdc::network_fabric(m_node_count, m_nodes);
+    m_network = new sdc::network_fabric(m_node_count, m_nodes);
   }
 
   simulator::~simulator() {
@@ -17,7 +18,13 @@ namespace sdc {
       delete m_nodes[i];
     }
     delete m_nodes;
-    delete m_network_fabric
+    delete m_network;
+  }
+
+  // Run simulator
+
+  void simulator::run() {
+
   }
 
 }

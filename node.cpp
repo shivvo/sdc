@@ -1,8 +1,8 @@
-
 #include "node.h"
 
 namespace sdc {
-  
+
+  // Constructors/destructor  
   node::node(int node_id, int node_count) {
     m_node_id = node_id;
     m_node_count = node_count;
@@ -15,9 +15,7 @@ namespace sdc {
     delete m_local_queues;
   }
   
-  int node::node_id() {
-    return m_node_id;
-  }
+  // Packet processing  
 
   void node::accept_packet(sdc::packet pkt) {
     int target_node = pkt.target_node();
@@ -25,5 +23,15 @@ namespace sdc {
       // TODO
     }
     m_local_queues[target_node].push(pkt);
+  }
+
+  void node::transmit_next_packet() {
+
+  }
+
+  // Getters
+
+  int node::node_id() {
+    return m_node_id;
   }
 }

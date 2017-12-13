@@ -1,4 +1,3 @@
-
 #ifndef SDC_NETWORK_FABRIC_H
 #define SDC_NETWORK_FABRIC_H
 
@@ -6,12 +5,19 @@
 #include "node.h"
 
 namespace sdc {
+
+  // Network Fabric - connects nodes and routes packets to them
   class network_fabric {
   private:
+    // Nodes connected to the network
     sdc::node **m_nodes;    
   public:
+    
+    // Constructors/destructor
     network_fabric(int node_count, sdc::node **nodes);
     ~network_fabric();
+
+    // Route packet to node
     void do_route_packet(sdc::packet pkt);
   };
 }

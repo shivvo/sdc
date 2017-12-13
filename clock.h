@@ -1,10 +1,11 @@
-
 #ifndef SDC_CLOCK_H
 #define SDC_CLOCK_H
 
 using time_t = unsigned long;
 
 namespace sdc {
+  
+  // Clock - used for timing SDC operation
   class clock {
   private:
     // Time value

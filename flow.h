@@ -1,10 +1,11 @@
-
 #ifndef SDC_FLOW_H
 #define SDC_FLOW_H
 
 #include "clock.h"
 
 namespace sdc {
+  
+  // Flow - glob of data to transport through the network
   class flow {
   private:
     // Flow info

@@ -1,4 +1,3 @@
-
 #include "clock.h"
 
 namespace sdc {

@@ -1,8 +1,8 @@
 CC=g++
 CFLAGS=-c -Wall -std=c++11
 LDFLAGS=
-HEADERS=packet.h node.h network_fabric.h flow.h
-SOURCES=main.cpp packet.cpp node.cpp network_fabric.cpp flow.cpp
+HEADERS=packet.h node.h network_fabric.h flow.h simulator.h
+SOURCES=main.cpp packet.cpp node.cpp network_fabric.cpp flow.cpp simulator.cpp
 OBJECTS=$(SOURCES:.cpp=.o)
 EXECUTABLE=sdc
 
@@ -13,3 +13,6 @@ $(EXECUTABLE): $(OBJECTS) $(HEADERS)
 
 .cpp.o: $(HEADERS)
 	$(CC) $(CFLAGS) $< -o $@
+
+clean:
+	rm *.o sdc

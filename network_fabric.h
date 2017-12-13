@@ -8,9 +8,10 @@
 namespace sdc {
   class network_fabric {
   private:
-    sdc::node** m_nodes;    
+    sdc::node **m_nodes;    
   public:
-    network_fabric(int node_count, sdc::node ** nodes);
+    network_fabric(int node_count, sdc::node **nodes);
+    ~network_fabric();
     void do_route_packet(sdc::packet pkt);
   };
 }

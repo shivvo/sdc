@@ -11,6 +11,7 @@ namespace sdc {
       m_nodes[i] = new sdc::node(i, m_node_count);
     }
     m_network = new sdc::network_fabric(m_node_count, m_nodes);
+    m_clock = sdc::clock(0);
   }
 
   simulator::~simulator() {

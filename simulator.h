@@ -3,6 +3,7 @@
 
 #include "node.h"
 #include "network_fabric.h"
+#include "clock.h"
 
 namespace sdc {
 
@@ -17,6 +18,9 @@ namespace sdc {
 		
     // Network fabric
     sdc::network_fabric *m_network;
+
+    // Clock
+    sdc::clock m_clock;
 	public:
 
     // Constructors/destructor
@@ -25,6 +29,9 @@ namespace sdc {
 
     // Run simulator
 		void run();
+
+    // Flow completion
+    void packet_arrived(int flow_id);
 	};
 }
 

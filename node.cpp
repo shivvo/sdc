@@ -3,10 +3,11 @@
 namespace sdc {
 
   // Constructors/destructor  
-  node::node(int node_id, int node_count) {
+  node::node(int node_id, int node_count, sdc::clock *clk) {
     m_node_id = node_id;
     m_node_count = node_count;
     m_local_queues = new std::queue<packet>[node_count];
+    m_clock = clk;
   }
   
   node::node() : node(-1, 0) {};
@@ -20,7 +21,7 @@ namespace sdc {
   void node::accept_packet(sdc::packet pkt) {
     int target_node = pkt.target_node();
     if (target_node == m_node_id) {
-      // TODO
+      
     }
     m_local_queues[target_node].push(pkt);
   }
@@ -28,6 +29,13 @@ namespace sdc {
   void node::transmit_next_packet() {
 
   }
+
+  // Setters
+
+  void node::set_network(sdc::network_fabric network) {
+    m_network = network;
+  }
+
 
   // Getters
 

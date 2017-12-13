@@ -3,6 +3,8 @@
 
 #include <queue>
 #include "packet.h"
+#include "network"
+#include "clock.h"
 
 namespace sdc {
   
@@ -15,10 +17,16 @@ namespace sdc {
 
     // Local queues
     std::queue<packet> *m_local_queues;
+
+    // Network
+    sdc::network_fabric *m_network;
+
+    // Clock
+    sdc::clock *m_clock;
   public:
     
     // Constructors/destructor
-    node(int node_id, int node_count);
+    node(int node_id, int node_count, sdc::clock *clk);
     node();
     ~node();
     
@@ -26,6 +34,9 @@ namespace sdc {
     void accept_packet(sdc::packet pkt);
     void transmit_next_packet();
     
+    // Setters
+    void set_network(sdc::network_fabric network);
+
     // Getters
     int node_id();
 

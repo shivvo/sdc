@@ -1,11 +1,13 @@
 #include "network_fabric.h"
 
+#include "node.h"
+
 namespace sdc {
   
   // Constructors/destructor
 
-  network_fabric::network_fabric(int node_count, sdc::node **nodes) {
-    m_nodes = nodes
+  network_fabric::network_fabric(sdc::node **nodes) {
+    m_nodes = nodes;
   }
 
   // Route packet to node

@@ -12,23 +12,33 @@ namespace sdc {
     m_target_node = -1;
   }
 
+  flow::flow(const flow &other) {
+    m_flow_id = other.m_flow_id;
+    m_size = other.m_size;
+    m_count_arrived = other.m_count_arrived;
+    m_source_node = other.m_source_node;
+    m_target_node = other.m_target_node;
+  }
+
+  flow::flow() : flow(-1, -1) {}
+
   // Flow state
 
   void flow::packet_arrived() {
     m_count_arrived++;
   }
 
-  void flow::completed() {
+  bool flow::completed() {
     return m_count_arrived == m_size;
   }
 
   // Setters
 
-  void flow::set_start_time(time_t start_time) {
+  void flow::set_start_time(unsigned long start_time) {
     m_start_time = start_time;
   }
 
-  void flow::set_end_time(time_t end_time) {
+  void flow::set_end_time(unsigned long end_time) {
     m_end_time = end_time;
   }
 
@@ -36,7 +46,7 @@ namespace sdc {
     m_source_node = source_node;
   }
 
-  void set_target_node(int target_node) {
+  void flow::set_target_node(int target_node) {
     m_target_node = target_node;
   }
 
@@ -55,14 +65,14 @@ namespace sdc {
   }
 
   int flow::target_node() {
-    return m_target_node();
+    return m_target_node;
   }
 
-  time_t flow::start_time() {
+  unsigned long flow::start_time() {
     return m_start_time;
   }
 
-  time_t flow::end_time() {
+  unsigned long flow::end_time() {
     return m_end_time;
   }
 }

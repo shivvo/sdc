@@ -1,26 +1,27 @@
 #ifndef SDC_CONTROLLER_H
 #define SDC_CONTROLLER_H
 
-#include "node.h"
-#include "schedule.h"
-#include "clock.h"
+#include <functional>
 
 namespace sdc {
+  
+  // Controller - centralized controller that decides schedules
+  class node;
+  class schedule;
+  class clock;
 
-	// Controller - a centralized controller that decides a schedule when demanded
-	class controller {
-	private:  
-    sdc::node **m_nodes;
-    sdc::schedule *m_sched;
-    sdc::clock *m_clk;
+  class controller {
+  
   public:
-
-    // Constructors/destructor
-    controller(sdc::node **nodes, sdc:scedule *sched, sdc::clock *clk);
+    
+    // Constructors/destructors
+    controller();
 
     // Controller operations
-    void run();
-	};
+    void update_schedule(sdc::schedule *sched, sdc::node **nodes, sdc::clock *clk);
+
+  };
+  
 }
 
 #endif

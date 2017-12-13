@@ -2,11 +2,11 @@
 #define SDC_NETWORK_FABRIC_H
 
 #include "packet.h"
-#include "node.h"
 
 namespace sdc {
 
   // Network Fabric - connects nodes and routes packets to them
+  class node;
   class network_fabric {
   private:
     // Nodes connected to the network

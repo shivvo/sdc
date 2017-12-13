@@ -19,9 +19,12 @@ namespace sdc {
     ~schedule();
 
     // Access/modify schedule information
-    int target_from_source(int source_node, time_t clk_val);
+    int target_from_source(int source_node, unsigned long clk_val);
     void set_schedule_for_node(int node_id, int *row);
   };
+
+  schedule std_sched(int node_count, int cycle_count);
+
 }
 
 #endif

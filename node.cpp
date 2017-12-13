@@ -1,5 +1,9 @@
 #include "node.h"
 
+#include "network_fabric.h"
+#include "schedule.h"
+#include "simulator.h"
+
 namespace sdc {
 
   // Constructors/destructor  
@@ -18,9 +22,12 @@ namespace sdc {
   // Flow and packet processing  
 
   void node::start_flow(sdc::flow flw) {
-    for (int i = 0; i < flw.size()) {
-      sdc::packet pkt(flw.source_node(), flw.target_node(), flw.flow_id(), i);
-      m_local_queue[(flw.target_node() + i) % m_node_count].push(pkt);
+    int seq_no = 0;
+    for (int i = 0; seq_no < flw.size(); i++) {
+      int node_id = (flw.target_node() + i) % m_node_count;
+      if (node_id == m_node_id) continue;
+      sdc::packet pkt(flw.source_node(), flw.target_node(), flw.flow_id(), seq_no++);
+      m_local_queues[node_id].push(pkt);
     }
   }
 
@@ -34,21 +41,22 @@ namespace sdc {
   }
 
   void node::transmit_next_packet() {
-    int target_node = m_sched->target_from_source(m_node_id, m_clk->current_time())
+    int target_node = m_sched->target_from_source(m_node_id, m_clk->current_time());
     if (!m_local_queues[target_node].empty()) {
-      sdc::packet pkt = m_local_queues[target_node].pop();
-      m_network.do_route_packet(pkt);
+      sdc::packet pkt = m_local_queues[target_node].front();
+      m_local_queues[target_node].pop();
+      m_network->do_route_packet(pkt);
       m_count_sent++;
     }
   }
 
   // Setters
 
-  void node::set_network(sdc::network_fabric network) {
+  void node::set_network(sdc::network_fabric *network) {
     m_network = network;
   }
 
-  void node::set_schedule(sdc::sched *sched) {
+  void node::set_schedule(sdc::schedule *sched) {
     m_sched = sched;
   }
 

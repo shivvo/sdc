@@ -4,7 +4,7 @@ namespace sdc {
 
   // Constructors/destructors
   
-  clock::clock(time_t start_time) {
+  clock::clock(unsigned long start_time) {
     m_time = start_time;
   }
 
@@ -14,13 +14,13 @@ namespace sdc {
     m_time++;
   }
 
-  void clock::advance(time_t offset) {
+  void clock::advance(unsigned long offset) {
     m_time += offset;
   }
 
   // Getters
 
-  time_t clock::current_time() {
+  unsigned long clock::current_time() {
     return m_time;
   }
 }

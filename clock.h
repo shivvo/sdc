@@ -1,7 +1,6 @@
 #ifndef SDC_CLOCK_H
 #define SDC_CLOCK_H
 
-using time_t = unsigned long;
 
 namespace sdc {
   
@@ -9,18 +8,18 @@ namespace sdc {
   class clock {
   private:
     // Time value
-    time_t m_time;
+    unsigned long m_time;
   public:
     
     // Constructors/destructors
-    clock(time_t start_time);
+    clock(unsigned long start_time);
     
     // Modify time 
     void tick();
-    void advance(time_t offset);
+    void advance(unsigned long offset);
   
     // Getters
-    time_t current_time();
+    unsigned long current_time();
   };
 }
 

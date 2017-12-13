@@ -1,8 +1,6 @@
 #ifndef SDC_FLOW_H
 #define SDC_FLOW_H
 
-#include "clock.h"
-
 namespace sdc {
   
   // Flow - glob of data to transport through the network
@@ -16,20 +14,22 @@ namespace sdc {
     int m_source_node;
     int m_target_node;
     // Flow start and end times
-    time_t m_start_time;
-    time_t m_end_time;
+    unsigned long m_start_time;
+    unsigned long m_end_time;
   public:
     
     // Constructors/destructor 
     flow(int flow_id, int size);
+    flow(const flow &other);
+    flow();
 
     // Flow state
     void packet_arrived();
     bool completed();
 
     // Setters 
-    void set_start_time(time_t start_time);
-    void set_end_time(time_t end_time);
+    void set_start_time(unsigned long start_time);
+    void set_end_time(unsigned long end_time);
     void set_source_node(int source_node);
     void set_target_node(int target_node);
 
@@ -38,8 +38,8 @@ namespace sdc {
     int size();
     int source_node();
     int target_node();
-    time_t start_time();
-    time_t end_time();
+    unsigned long start_time();
+    unsigned long end_time();
   };
 }
 

@@ -2,23 +2,23 @@
 #define SDC_NODE_H
 
 #include <queue>
+#include "clock.h"
 #include "flow.h"
 #include "packet.h"
-#include "network_fabric.h"
-#include "clock.h"
-#include "simulator.h"
 #include "schedule.h"
-#include "flow.h"
 
 namespace sdc {
   
   // Node - unit of communication lowest in SDC (ToRs, racks, etc.)
+  class network_fabric;
+  class simulator;
+
   class node {
   private:
     // Node information
     int m_node_id;
     int m_node_count;
-    long m_count_sent; 
+    long m_count_sent;
     // Local queues
     std::queue<packet> *m_local_queues;
     // Network
@@ -41,8 +41,8 @@ namespace sdc {
     void transmit_next_packet();
     
     // Setters
-    void set_network(sdc::network_fabric network);
-    void set_schedule(sdc::sched *sched);    
+    void set_network(sdc::network_fabric *network);
+    void set_schedule(sdc::schedule *sched);
     void set_simulator(sdc::simulator *sim);
 
     // Getters

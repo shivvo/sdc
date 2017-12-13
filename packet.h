@@ -9,7 +9,6 @@ namespace sdc {
     // Source, target
     int m_source_node;
     int m_target_node;
-
     // Flow information
     int m_flow_id;
     int m_seq_num;
@@ -17,7 +16,6 @@ namespace sdc {
     
     // Constructors and destructors
     packet(int source_node, int target_node, int flow_id, int seq_num);
-    packet();
 
     // Getters
     int source_node();

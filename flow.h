@@ -12,11 +12,9 @@ namespace sdc {
     int m_flow_id;
     int m_size;
     int m_count_arrived;
-
     // Source, target
     int m_source_node;
     int m_target_node;
-
     // Flow start and end times
     time_t m_start_time;
     time_t m_end_time;
@@ -38,6 +36,8 @@ namespace sdc {
     // Getters
     int flow_id();
     int size();
+    int source_node();
+    int target_node();
     time_t start_time();
     time_t end_time();
   };

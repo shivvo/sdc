@@ -4,6 +4,7 @@
 #include "node.h"
 #include "network_fabric.h"
 #include "clock.h"
+#include "schedule.h"
 
 namespace sdc {
 
@@ -12,13 +13,12 @@ namespace sdc {
 	private:
     // Number of nodes in the network
 		int m_node_count;        
-
     // Nodes
 		sdc::node **m_nodes;
-		
     // Network fabric
-    sdc::network_fabric *m_network;
-
+    sdc::network_fabric m_network;
+    // Network schedule
+    sdc::schedule m_sched;
     // Clock
     sdc::clock m_clock;
 	public:

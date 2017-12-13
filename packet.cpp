@@ -11,8 +11,6 @@ namespace sdc {
     m_seq_num = seq_num;
   };
   
-  packet::packet () : packet(-1, -1, -1, -1) {};   
-
   // Getters
 
   int packet::source_node() {

@@ -8,6 +8,8 @@ namespace sdc {
     m_flow_id = flow_id;
     m_size = size;
     m_count_arrived = 0;
+    m_source_node = -1;
+    m_target_node = -1;
   }
 
   // Flow state
@@ -46,6 +48,14 @@ namespace sdc {
 
   int flow::size() {
     return m_size;
+  }
+
+  int flow::source_node() {
+    return m_source_node;
+  }
+
+  int flow::target_node() {
+    return m_target_node();
   }
 
   time_t flow::start_time() {

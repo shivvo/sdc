@@ -18,8 +18,9 @@ namespace sdc {
     schedule(int **matrix, int node_count, int cycle_lenth);
     ~schedule();
 
-    // Access schedule information
+    // Access/modify schedule information
     int target_from_source(int source_node, time_t clk_val);
+    void set_schedule_for_node(int node_id, int *row);
   };
 }
 

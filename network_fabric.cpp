@@ -5,14 +5,7 @@ namespace sdc {
   // Constructors/destructor
 
   network_fabric::network_fabric(int node_count, sdc::node **nodes) {
-    m_nodes = new sdc::node *[node_count];
-    for (int i = 0; i < node_count; i++) {
-      m_nodes[i] = nodes[i];
-    }
-  }
-
-  network_fabric::~network_fabric() {
-    delete m_nodes;
+    m_nodes = nodes
   }
 
   // Route packet to node

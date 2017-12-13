@@ -14,9 +14,8 @@ namespace sdc {
   public:
     
     // Constructors/destructor
-    network_fabric(int node_count, sdc::node **nodes);
-    ~network_fabric();
-
+    network_fabric(sdc::node **nodes);
+    
     // Route packet to node
     void do_route_packet(sdc::packet pkt);
   };

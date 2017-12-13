@@ -29,4 +29,9 @@ namespace sdc {
         return m_matrix[source_id][clk_val % m_cycle_length];
     }
 
+    void schedule::set_schedule_for_node(int node_id, int *row) {
+        for (int i = 0; i < m_cycle_length; i++) {
+            m_matrix[node_id][i] = row[i];
+        }
+    }
 }

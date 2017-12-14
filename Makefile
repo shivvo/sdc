@@ -15,4 +15,4 @@ $(EXECUTABLE): $(OBJECTS) $(HEADERS)
 	$(CC) $(CFLAGS) $< -o $@
 
 clean:
-	rm *.o sdc *-log.csv
+	rm *.o sdc

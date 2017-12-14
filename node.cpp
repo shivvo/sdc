@@ -16,7 +16,7 @@ namespace sdc {
   }
   
   node::~node() {
-    delete m_local_queues;
+    delete[] m_local_queues;
   }
   
   // Flow and packet processing  

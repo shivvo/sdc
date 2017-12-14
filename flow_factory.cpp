@@ -13,14 +13,11 @@ namespace sdc {
     std::vector<sdc::flow> flws;
     int flow_id = 0;
     
-    for (int i = 0; i < m_pair_count; i++) { 
-      for (int j = 0; j < m_pair_count; j++) {
-        if (i == j) continue;   
-        sdc::flow flw(flow_id++, m_flow_size);
-        flw.set_source_node(i);
-        flw.set_target_node(j);    
-        flws.push_back(flw);
-      }
+    for (int i = 0; i < m_pair_count; i++) {
+      sdc::flow flw(flow_id++, m_flow_size);
+      flw.set_source_node(i);
+      flw.set_target_node(i + m_pair_count);    
+      flws.push_back(flw);
     }
     
     return flws;

@@ -1,5 +1,7 @@
 #include "flow.h"
 
+#include <iostream>
+
 namespace sdc {
 
   // Constructors/destructor

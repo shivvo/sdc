@@ -5,12 +5,12 @@
 #include "clock.h"
 #include "flow.h"
 #include "packet.h"
-#include "schedule.h"
 
 namespace sdc {
   
   // Node - unit of communication lowest in SDC (ToRs, racks, etc.)
   class network_fabric;
+  class schedule;
   class simulator;
 
   class node {

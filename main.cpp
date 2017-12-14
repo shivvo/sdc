@@ -5,8 +5,10 @@
 
 int main() {
 	std::cout << "hello, world!" << std::endl;
-  int n = 256;
+  int n = 1024;
+  int pair_count = n / 8;
   sdc::controller ctrl;
-  sdc::flow_factory flw_gen(n, n-1);
-  sdc::simulator sim(n, sdc::std_sched(n, 1), &ctrl, &flw_gen, n);
+  sdc::flow_factory flw_gen(pair_count, (n-1)*(n-1));
+  sdc::simulator sim(n, 1, &ctrl, &flw_gen, pair_count);
+  sim.run();
 }

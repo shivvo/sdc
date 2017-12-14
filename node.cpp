@@ -1,5 +1,6 @@
 #include "node.h"
 
+#include <iostream>
 #include "network_fabric.h"
 #include "schedule.h"
 #include "simulator.h"
@@ -45,7 +46,7 @@ namespace sdc {
     if (!m_local_queues[target_node].empty()) {
       sdc::packet pkt = m_local_queues[target_node].front();
       m_local_queues[target_node].pop();
-      m_network->do_route_packet(pkt);
+      m_network->do_route_packet(pkt, target_node);
       m_count_sent++;
     }
   }
@@ -68,5 +69,9 @@ namespace sdc {
 
   int node::node_id() {
     return m_node_id;
+  }
+
+  unsigned long node::count_sent() {
+    return m_count_sent;
   }
 }

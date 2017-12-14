@@ -15,7 +15,7 @@ namespace sdc {
     
     // Constructors/destructor
     flow_factory(int pair_count, int flow_size);
-
+    
     // Get flows for time
     std::vector<sdc::flow> flows_for_time(unsigned long clk_value); 
 

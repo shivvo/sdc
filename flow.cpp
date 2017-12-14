@@ -14,15 +14,9 @@ namespace sdc {
     m_target_node = -1;
   }
 
-  flow::flow(const flow &other) {
-    m_flow_id = other.m_flow_id;
-    m_size = other.m_size;
-    m_count_arrived = other.m_count_arrived;
-    m_source_node = other.m_source_node;
-    m_target_node = other.m_target_node;
-  }
+  flow::flow(const flow &other) = default;
 
-  flow::flow() : flow(-1, -1) {}
+  flow::flow() = default;
 
   // Flow state
 
@@ -32,6 +26,10 @@ namespace sdc {
 
   bool flow::completed() {
     return m_count_arrived == m_size;
+  }
+
+  double flow::fct() {
+    return (double) (m_end_time - m_start_time + 1);
   }
 
   // Setters

@@ -26,6 +26,7 @@ namespace sdc {
     // Flow state
     void packet_arrived();
     bool completed();
+    double fct();
 
     // Setters 
     void set_start_time(unsigned long start_time);

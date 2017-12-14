@@ -6,6 +6,7 @@
 #include "controller.h"
 #include "flow.h"
 #include "flow_factory.h"
+#include "logger.h"
 #include "network_fabric.h"
 #include "node.h"
 #include "schedule.h"
@@ -15,8 +16,10 @@ namespace sdc {
   // Simulator - simulates SDC
 	class simulator {
 	private:
+    // Logger
+    sdc::logger *m_log;
     // Number of nodes in the network
-		int m_node_count;        
+		int m_node_count;
     // Clock
     sdc::clock m_clk;
     // Network schedule
@@ -27,9 +30,12 @@ namespace sdc {
     sdc::flow_factory *m_flw_gen;
     // Flows
     std::unordered_map<int, sdc::flow> m_flws;
-    // Flow target tracking
+    
+    // Flow tracking
     int m_flows_max;
     int m_flows_completed;
+    double m_fct_total;
+    unsigned long m_time_flow_last_completed;
 
     // Nodes
 		sdc::node **m_nodes;
@@ -39,7 +45,7 @@ namespace sdc {
 	public:
 
     // Constructors/destructor
-		simulator(int node_count, int cycle_count, sdc::controller *ctrl, sdc::flow_factory *flw_gen, int flows_max);
+		simulator(sdc::logger *log, int node_count, int cycle_count, sdc::controller *ctrl, sdc::flow_factory *flw_gen, int flows_max);
 		~simulator();
 
     // Run simulator

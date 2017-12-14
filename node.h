@@ -18,7 +18,7 @@ namespace sdc {
     // Node information
     int m_node_id;
     int m_node_count;
-    long m_count_sent;
+    unsigned long m_count_sent;
     // Local queues
     std::queue<packet> *m_local_queues;
     // Network
@@ -47,6 +47,7 @@ namespace sdc {
 
     // Getters
     int node_id();
+    unsigned long count_sent();
 
   };
 }

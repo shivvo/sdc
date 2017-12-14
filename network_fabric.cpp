@@ -11,8 +11,8 @@ namespace sdc {
   }
 
   // Route packet to node
-  void network_fabric::do_route_packet(sdc::packet pkt) {
-    m_nodes[pkt.target_node()]->accept_packet(pkt);
+  void network_fabric::do_route_packet(sdc::packet pkt, int target_node) {
+    m_nodes[target_node]->accept_packet(pkt);
   }
 
 }

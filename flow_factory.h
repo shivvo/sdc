@@ -1,5 +1,5 @@
-#ifndef SDC_FLOW_FACTORY
-#define SDC_FLOW_FACTORY
+#ifndef SDC_FLOW_FACTORY_H
+#define SDC_FLOW_FACTORY_H
 
 #include <vector>
 #include "flow.h"
@@ -24,10 +24,10 @@ namespace sdc {
     flow_factory(int pair_count, int flow_size);
 
     // Get flows for time
-    std::vector<sdc::flow> flows_for_time(unsigned long clk_value); 
+    virtual std::vector<sdc::flow> flows_for_time(unsigned long clk_value); 
 
     // Estimated number of flows generated
-    int estimated_count();
+    virtual int estimated_count();
   };
 }
 

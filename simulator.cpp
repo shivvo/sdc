@@ -61,6 +61,7 @@ namespace sdc {
       for (int i = 0; i < m_node_count; i++) {
         m_nodes[i]->transmit_next_packet();
       }
+      m_network->flush();
       m_ctrl->update_schedule(&m_sched, m_nodes, &m_clk);
       m_clk.tick();
     }

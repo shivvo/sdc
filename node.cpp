@@ -7,6 +7,10 @@
 
 namespace sdc {
 
+  void node::enqueue_packet(sdc::packet pkt, int node_id) {
+    m_local_queues[node_id].push(pkt);
+  }
+
   // Constructors/destructor  
   node::node(int node_id, int node_count, sdc::clock *clk) {
     m_node_id = node_id;
@@ -28,7 +32,7 @@ namespace sdc {
       int node_id = (flw.target_node() + i) % m_node_count;
       if (node_id == m_node_id) continue;
       sdc::packet pkt(flw.source_node(), flw.target_node(), flw.flow_id(), seq_no++);
-      m_local_queues[node_id].push(pkt);
+      enqueue_packet(pkt, node_id);
     }
   }
 
@@ -37,7 +41,7 @@ namespace sdc {
     if (target_node == m_node_id) {
       m_sim->packet_arrived(pkt.flow_id());
     } else {
-      m_local_queues[target_node].push(pkt);
+      enqueue_packet(pkt, target_node);
     }
   }
 

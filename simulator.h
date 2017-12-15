@@ -9,6 +9,7 @@
 #include "logger.h"
 #include "network_fabric.h"
 #include "node.h"
+#include "node_factory.h"
 #include "schedule.h"
 
 namespace sdc {
@@ -18,6 +19,8 @@ namespace sdc {
 	private:
     // Logger
     sdc::logger *m_log;
+    // Node factory
+    sdc::node_factory *m_node_gen;
     // Number of nodes in the network
 		int m_node_count;
     // Clock
@@ -45,7 +48,7 @@ namespace sdc {
 	public:
 
     // Constructors/destructor
-		simulator(sdc::logger *log, int node_count, int cycle_count, sdc::controller *ctrl, sdc::flow_factory *flw_gen, int flows_max);
+		simulator(sdc::logger *log, sdc::node_factory *node_gen, int node_count, int cycle_count, sdc::controller *ctrl, sdc::flow_factory *flw_gen, int flows_max);
 		~simulator();
 
     // Run simulator

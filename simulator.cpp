@@ -9,16 +9,17 @@ namespace sdc {
 
   // Constructors/destructor
 
-  simulator::simulator(sdc::logger *log, int node_count, int cycle_length, sdc::controller *ctrl, sdc::flow_factory *flw_gen, int flows_max)
+  simulator::simulator(sdc::logger *log, sdc::node_factory *node_gen, int node_count, int cycle_length, sdc::controller *ctrl, sdc::flow_factory *flw_gen, int flows_max)
   : m_clk(0), m_sched(node_count, cycle_length) {
     m_log = log;
+    m_node_gen = node_gen;
     m_node_count = node_count;
     m_ctrl = ctrl;
     m_flw_gen = flw_gen;
 
     m_nodes = new sdc::node *[m_node_count];
     for (int i = 0; i < m_node_count; i++) {
-      m_nodes[i] = new sdc::node(i, m_node_count, &m_clk);
+      m_nodes[i] = m_node_gen->make_node(i, m_node_count, &m_clk);
     }
     
     m_network = new sdc::network_fabric(m_nodes);

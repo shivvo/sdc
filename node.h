@@ -8,13 +8,13 @@
 
 namespace sdc {
   
-  // Node - unit of communication lowest in SDC (ToRs, racks, etc.)
+  // Node - unit of communication lowest in SDC (ToRs, racks, etc.). Round-robin operation
   class network_fabric;
   class schedule;
   class simulator;
 
   class node {
-  private:
+  protected:
     // Node information
     int m_node_id;
     int m_node_count;
@@ -29,16 +29,18 @@ namespace sdc {
     sdc::clock *m_clk;
     // Simulator
     sdc::simulator *m_sim;
+
+    virtual void enqueue_packet(sdc::packet pkt, int node_id);
   public:
     
     // Constructors/destructor
     node(int node_id, int node_count, sdc::clock *clk);
-    ~node();
+    virtual ~node();
     
     // Flow and packet processing
-    void start_flow(sdc::flow flw);
-    void accept_packet(sdc::packet pkt);
-    void transmit_next_packet();
+    virtual void start_flow(sdc::flow flw);
+    virtual void accept_packet(sdc::packet pkt);
+    virtual void transmit_next_packet();
     
     // Setters
     void set_network(sdc::network_fabric *network);

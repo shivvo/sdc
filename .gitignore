@@ -1,5 +1,3 @@
 *.swp
 *.o
-agg_stats
-stats
-synth
+sdc

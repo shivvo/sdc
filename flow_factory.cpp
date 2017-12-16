@@ -59,7 +59,7 @@ namespace sdc {
     std::vector<sdc::flow> flws;    
     
     if (clk_value == 0) {
-      two_sided_pair(flws);
+      all_to_all(flws);
     }
     
     return flws;
@@ -68,7 +68,7 @@ namespace sdc {
   // Estimated number of flows generated
   
   int flow_factory::estimated_count() {
-    return 2 * m_pair_count;
+    return m_pair_count * m_pair_count - m_pair_count;
   }
 
 }

@@ -2,12 +2,12 @@
 
 namespace sdc {
 
-    // Constructors/destructor
+  // Constructors/destructor
 
-    controller::controller() {}
+  controller::controller() {}
 
-    // Controller operations
+  // Controller operations
 
-    void controller::update_schedule(sdc::schedule *sched, sdc::node **nodes, sdc::clock *clk) {}
+  void controller::update_schedule(sdc::schedule *sched, sdc::node **nodes, sdc::clock *clk) {}
 
 }

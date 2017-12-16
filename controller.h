@@ -1,17 +1,14 @@
 #ifndef SDC_CONTROLLER_H
 #define SDC_CONTROLLER_H
 
-#include <functional>
-
 namespace sdc {
   
-  // Controller - centralized controller that decides schedules
   class node;
   class schedule;
   class clock;
 
-  class controller {
-  
+  // Controller - centralized controller that decides schedules
+  class controller {  
   public:
     
     // Constructors/destructors

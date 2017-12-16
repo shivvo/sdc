@@ -11,12 +11,12 @@ namespace sdc {
   }
 
   // Route packet to node
-  void network_fabric::do_route_packet(sdc::packet pkt, int target_node) {
+  void network_fabric::push_packet(sdc::packet pkt, int target_node) {
     m_pkt_queue.push(pkt);
     m_target_queue.push(target_node);
   }
 
-  void network_fabric::flush() {
+  void network_fabric::flush_all_packets() {
     int count_pkts = m_pkt_queue.size();
     for (int i = 0; i < count_pkts; i++) {
       sdc::packet pkt = m_pkt_queue.front();

@@ -1,9 +1,9 @@
 #ifndef SDC_LOGGER_H
 #define SDC_LOGGER_H
 
-#include <string>
 #include <iostream>
 #include <fstream>
+#include <string>
 #include "flow.h"
 
 namespace sdc {

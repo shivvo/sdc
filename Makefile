@@ -2,18 +2,17 @@ CC=g++
 CFLAGS=-c -g -Wall -std=c++11
 LDFLAGS=
 HEADERS=clock.h controller.h flow.h flow_factory.h logger.h network_fabric.h node.h node_factory.h packet.h schedule.h simple_drain_node.h simple_drain_node_factory.h simulator.h synth_flow_factory.h
-SOURCES=clock.cpp controller.cpp flow.cpp flow_factory.cpp logger.cpp network_fabric.cpp node.cpp node_factory.cpp packet.cpp schedule.cpp simple_drain_node.cpp simple_drain_node_factory.cpp simulator.cpp synth_flow_factory.cpp
+SOURCES=main.cpp clock.cpp controller.cpp flow.cpp flow_factory.cpp logger.cpp network_fabric.cpp node.cpp node_factory.cpp packet.cpp schedule.cpp simple_drain_node.cpp simple_drain_node_factory.cpp simulator.cpp synth_flow_factory.cpp
 OBJECTS=$(SOURCES:.cpp=.o) 
-EXECUTABLES=agg_stats stats sim_synth_simpledrain sim_synth_roundrobin synth 
-MAIN_SOURCES= $(foreach e,$(EXECUTABLES), $(e).cpp)
+EXECUTABLE=sdc
 
-all: $(MAINS) $(SOURCES) $(EXECUTABLES)
+all: $(MAINS) $(SOURCES) $(EXECUTABLE)
     
-$(EXECUTABLES): $(OBJECTS) $(MAIN_OBJECTS) $(HEADERS) $(MAIN_SOURCES)
-	$(CC) $(CFLAGS) $@.cpp -o $@.o; $(CC) $(LDFLAGS) $(OBJECTS) $@.o -o $@
+$(EXECUTABLE): $(OBJECTS) $(HEADERS)
+	$(CC) $(LDFLAGS) $(OBJECTS) -o $@
 
 .cpp.o: $(HEADERS)
 	$(CC) $(CFLAGS) $< -o $@
 
 clean:
-	rm *.o agg_stats stats synth sim_synth_simpledrain sim_synth_roundrobin
+	rm *.o sdc

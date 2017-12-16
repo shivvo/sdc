@@ -35,10 +35,9 @@ namespace sdc {
     std::unordered_map<int, sdc::flow> m_flws;
     
     // Flow tracking
-    int m_flows_max;
-    int m_flows_completed;
+    int m_count_flows_done;
     double m_fct_total;
-    unsigned long m_time_flow_last_completed;
+    unsigned long m_time_flows_done;
 
     // Nodes
 		sdc::node **m_nodes;
@@ -48,7 +47,7 @@ namespace sdc {
 	public:
 
     // Constructors/destructor
-		simulator(sdc::logger *log, sdc::node_factory *node_gen, int node_count, int cycle_count, sdc::controller *ctrl, sdc::flow_factory *flw_gen, int flows_max);
+		simulator(sdc::logger *log, sdc::node_factory *node_gen, int node_count, sdc::controller *ctrl, sdc::flow_factory *flw_gen);
 		~simulator();
 
     // Run simulator

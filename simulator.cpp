@@ -9,8 +9,8 @@ namespace sdc {
 
   // Constructors/destructor
 
-  simulator::simulator(sdc::logger *log, sdc::node_factory *node_gen, int node_count, int cycle_length, sdc::controller *ctrl, sdc::flow_factory *flw_gen, int flows_max)
-  : m_clk(0), m_sched(node_count, cycle_length) {
+  simulator::simulator(sdc::logger *log, sdc::node_factory *node_gen, int node_count, sdc::controller *ctrl, sdc::flow_factory *flw_gen)
+  : m_clk(0), m_sched(node_count) {
     m_log = log;
     m_node_gen = node_gen;
     m_node_count = node_count;
@@ -30,10 +30,9 @@ namespace sdc {
       m_nodes[i]->set_simulator(this);
     }
 
-    m_flows_max = flows_max;
-    m_flows_completed = 0;
+    m_count_flows_done = 0;
     m_fct_total = 0;
-    m_time_flow_last_completed = 0;
+    m_time_flows_done = 0;
   }
 
   simulator::~simulator() {
@@ -47,7 +46,7 @@ namespace sdc {
   // Run simulator
 
   void simulator::run() {
-    while (m_flows_completed < m_flows_max) {
+    while (m_count_flows_done < m_flw_gen->estimated_count()) {
       
       std::vector<sdc::flow> flws = m_flw_gen->flows_for_time(m_clk.current_time());
       if (flws.size() > 0) std::cout << "Starting " << flws.size() << " flows..." << std::endl;
@@ -61,31 +60,35 @@ namespace sdc {
       for (int i = 0; i < m_node_count; i++) {
         m_nodes[i]->transmit_next_packet();
       }
-      m_network->flush();
+      m_network->flush_all_packets();
       m_ctrl->update_schedule(&m_sched, m_nodes, &m_clk);
       m_clk.tick();
     }
 
     double total_sent = 0;
     for (int i = 0; i < m_node_count; i++) {
-      double gp = (double) m_nodes[i]->count_sent() / m_time_flow_last_completed;
+      double gp = (double) m_nodes[i]->count_sent() / m_time_flows_done;
       m_log->log_gp(i, gp);
       total_sent += m_nodes[i]->count_sent();
     }
 
-    m_log->log_avg("gp", total_sent / (m_node_count * m_time_flow_last_completed));
-    m_log->log_avg("fct", m_fct_total / m_flows_completed);    
+    m_log->log_avg("gp", total_sent / (m_node_count * m_time_flows_done));
+    m_log->log_avg("fct", m_fct_total / m_count_flows_done);    
   }
+
+  // Flow completion
 
   void simulator::packet_arrived(int flow_id) {
     m_flws[flow_id].packet_arrived();
     if (m_flws[flow_id].completed()) {
       std::cout << "Flow " << flow_id << " finished at " << m_clk.current_time() << "..." << std::endl;
       m_flws[flow_id].set_end_time(m_clk.current_time());
-      m_flows_completed++;
+      m_count_flows_done++;
+      
       m_fct_total += m_flws[flow_id].fct();
       m_log->log_fct(m_flws[flow_id]);
-      m_time_flow_last_completed = m_clk.current_time();
+      m_time_flows_done= m_clk.current_time();
+      m_flws.erase(flow_id);
     }
   }
 

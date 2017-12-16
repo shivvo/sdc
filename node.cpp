@@ -7,6 +7,7 @@
 
 namespace sdc {
 
+  // Enqueue a packet
   void node::enqueue_packet(sdc::packet pkt, int node_id) {
     m_local_queues[node_id].push(pkt);
   }
@@ -47,10 +48,10 @@ namespace sdc {
 
   void node::transmit_next_packet() {
     int target_node = m_sched->target_from_source(m_node_id, m_clk->current_time());
-    if (!m_local_queues[target_node].empty()) {
+    if (m_local_queues[target_node].size() > 0) {
       sdc::packet pkt = m_local_queues[target_node].front();
       m_local_queues[target_node].pop();
-      m_network->do_route_packet(pkt, target_node);
+      m_network->push_packet(pkt, target_node);
       m_count_sent++;
     }
   }

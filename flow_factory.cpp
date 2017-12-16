@@ -46,17 +46,21 @@ namespace sdc {
     }
   }
 
+  // Constructors/destructor
 
   flow_factory::flow_factory(int pair_count, int flow_size) {
     m_pair_count = pair_count;
     m_flow_size = flow_size;
   }
 
+  // Get flows for time
+
   std::vector<sdc::flow> flow_factory::flows_for_time(unsigned long clk_value) {
-    if (clk_value > 0) return std::vector<sdc::flow>();
-    
     std::vector<sdc::flow> flws;    
-    two_sided_pair(flws);
+    
+    if (clk_value == 0) {
+      two_sided_pair(flws);
+    }
     
     return flws;
   }

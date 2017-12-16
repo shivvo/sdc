@@ -4,8 +4,10 @@
 
 namespace sdc {
 
+  // Constructors/destructor
   simple_drain_node_factory::simple_drain_node_factory() : node_factory::node_factory() {}
 
+  // Make a node
   sdc::node *simple_drain_node_factory::make_node(int node_id, int node_count, sdc::clock *clk) {
     return new sdc::simple_drain_node(node_id, node_count, clk);
   }

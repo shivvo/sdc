@@ -1,7 +1,6 @@
 #ifndef SDC_CLOCK_H
 #define SDC_CLOCK_H
 
-
 namespace sdc {
   
   // Clock - used for timing SDC operation

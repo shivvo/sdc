@@ -6,8 +6,9 @@
 
 namespace sdc {
 
+  class node;  
+
   // Network Fabric - connects nodes and routes packets to them
-  class node;
   class network_fabric {
   private:
     // Nodes connected to the network
@@ -20,8 +21,8 @@ namespace sdc {
     network_fabric(sdc::node **nodes);
     
     // Route packet to node
-    void do_route_packet(sdc::packet pkt, int target_node);
-    void flush();
+    void push_packet(sdc::packet pkt, int target_node);
+    void flush_all_packets();
   };
 }
 
